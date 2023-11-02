@@ -58,7 +58,8 @@ def change_contact(args, contacts: AddressBook):
         return result
     except PhoneFormatError as e:
         return e
- 
+
+
 @input_error
 def delete(args, contacts: AddressBook):
     try:
@@ -67,7 +68,8 @@ def delete(args, contacts: AddressBook):
         contacts.save_records()
         return 'Contact removed'
     except KeyError:
-            return 'Contact not found'
+        return 'Contact not found'
+
 
 @input_error
 def show_phone(args, contacts: AddressBook):
@@ -119,12 +121,15 @@ def birthdays(args, contacts: AddressBook):
 
 def add_address(args, contacts: AddressBook):
     try:
-        name, *address = args  # args[0], args[1:]
+        name, *address = args
         address_str = (" ").join(address).title()
         contact = contacts.find(name)
-        contact.add_address(address_str)
-        contacts.save_records()
-        return 'Address added.'
+        if hasattr(contact, 'address'):
+            return 'Contact already has address.'
+        else:
+            contact.add_address(address_str)
+            contacts.save_records()
+            return 'Address added.'
     except AddressFormatError as e:
         return e
     except AddressEmptyError as e:
@@ -144,6 +149,27 @@ def show_address(args, contacts: AddressBook):
         return 'You need to give name.'
     except KeyError:
         return 'Contact not found.'
+
+
+def change_address(args, contacts: AddressBook):
+    try:
+        name, *address = args
+        address_str = (" ").join(address).title()
+        contact = contacts.find(name)
+        current_address = contact.address.value
+        contact.add_address(address_str)
+        contacts.save_records()
+        return 'Address changed.'
+    except AddressFormatError as e:
+        return e
+    except AddressEmptyError as e:
+        return e
+    except IndexError:
+        return 'You need to give name and address.'
+    except KeyError:
+        return 'Contact not found.'
+    except AttributeError:
+        return 'Contact has no address to change.'
 
 
 def search(args, contacts: AddressBook):
@@ -173,21 +199,27 @@ def remove_note(args, notes: Notebook):
 def all_notes(notes: Notebook):
     return notes
 
+
 def add_tags(args, notes: Notebook):
     id, *tags = args
     return notes.add_tags(id, tags)
+
 
 def remove_tag(args, notes: Notebook):
     id, tag = args
     return notes.remove_tag(id, tag)
 
+
 def add_email(args, contacts: AddressBook):
     try:
         name, email = args
         contact = contacts.find(name)
-        contact.add_email(email)
-        contacts.save_records()
-        return 'Email added.'
+        if hasattr(contact, 'email'):
+            return 'Contact already has email.'
+        else:
+            contact.add_email(email)
+            contacts.save_records()
+            return 'Email added.'
     except EmailFormatError as e:
         return e
     except ValueError:
@@ -205,6 +237,24 @@ def show_email(args, contacts: AddressBook):
         return 'You need to give name.'
     except KeyError:
         return 'Contact not found.'
+
+
+def change_email(args, contacts: AddressBook):
+    try:
+        name, email = args
+        contact = contacts.find(name)
+        current_email = contact.email.value
+        contact.add_email(email)
+        contacts.save_records()
+        return 'Email changed'
+    except EmailFormatError as e:
+        return e
+    except ValueError:
+        return 'You need to give name and email.'
+    except KeyError:
+        return 'Contact not found.'
+    except AttributeError:
+        return 'Contact has no email to change.'
 
 
 def check_suggestion(keyword, items):
@@ -241,9 +291,11 @@ def main():
         'birthdays': {'name': birthdays, 'obj': contacts},
         'add-address': {'name': add_address, 'obj': contacts},
         'show-address': {'name': show_address, 'obj': contacts},
+        'change-address': {'name': change_address, 'obj': contacts},
         'search': {'name': search, 'obj': contacts},
         'add-email': {'name': add_email, 'obj': contacts},
         'show-email': {'name': show_email, 'obj': contacts},
+        'change-email': {'name': change_email, 'obj': contacts},
 
         'add-note': {'name': add_note, 'obj': notes},
         'update-note': {'name': update_note, 'obj': notes},
