@@ -61,7 +61,7 @@ def change_contact(args, contacts: AddressBook):
 
 
 @input_error
-def delete(args, contacts: AddressBook):
+def delete_contact(args, contacts: AddressBook):
     try:
         name = args[0]
         contacts.delete(name)
@@ -81,7 +81,7 @@ def show_all(contacts: AddressBook):
     return str(contacts)
 
 
-def show(args, contacts: AddressBook):
+def show_contact(args, contacts: AddressBook):
     try:
         name = args[0]
         contact = contacts.find(name)
@@ -242,7 +242,7 @@ def delete_address(args, contacts: AddressBook):
         return 'Contact not found.'
 
 
-def search(args, contacts: AddressBook):
+def search_contact(args, contacts: AddressBook):
     return contacts.search(args[0].strip())
 
 
@@ -261,7 +261,7 @@ def search_note(args, notes: Notebook):
     return notes.search_note(text)
 
 
-def remove_note(args, notes: Notebook):
+def delete_note(args, notes: Notebook):
     id = args[0]
     return notes.remove_note(id)
 
@@ -272,10 +272,11 @@ def all_notes(notes: Notebook):
 
 def add_tags(args, notes: Notebook):
     id, *tags = args
+    if len(tags) == 0:
+        return 'Please enter tags'
     return notes.add_tags(id, tags)
-
-
-def remove_tag(args, notes: Notebook):
+    
+def delete_tag(args, notes: Notebook):
     id, tag = args
     return notes.remove_tag(id, tag)
 
@@ -372,35 +373,35 @@ def main():
     notes = Notebook()
 
     methods = {
-        'phone': {'name': show_phone, 'obj': contacts},
-        'add': {'name': add_contact, 'obj': contacts},
-        'change': {'name': change_contact, 'obj': contacts},
-        'delete': {'name': delete, 'obj': contacts},
-        'all': {'name': show_all, 'obj': contacts},
-        'add-birthday': {'name': add_birthday, 'obj': contacts},
-        'show-birthday': {'name': show_birthday, 'obj': contacts},
-        'change-birthday': {'name': change_birthday, 'obj': contacts},
-        'delete-birthday': {'name': delete_birthday, 'obj': contacts},
-        'birthdays': {'name': birthdays, 'obj': contacts},
         'add-address': {'name': add_address, 'obj': contacts},
-        'show-address': {'name': show_address, 'obj': contacts},
-        'change-address': {'name': change_address, 'obj': contacts},
-        'delete-address': {'name': delete_address, 'obj': contacts},
-        'search': {'name': search, 'obj': contacts},
+        'add-birthday': {'name': add_birthday, 'obj': contacts},
+        'add-contact': {'name': add_contact, 'obj': contacts},
         'add-email': {'name': add_email, 'obj': contacts},
-        'show-email': {'name': show_email, 'obj': contacts},
+        'all-contacts': {'name': show_all, 'obj': contacts},
+        'birthdays': {'name': birthdays, 'obj': contacts},
+        'change-address': {'name': change_address, 'obj': contacts},
+        'change-birthday': {'name': change_birthday, 'obj': contacts},
         'change-email': {'name': change_email, 'obj': contacts},
+        'change-phone': {'name': change_contact, 'obj': contacts},
+        'delete-address': {'name': delete_address, 'obj': contacts},
+        'delete-birthday': {'name': delete_birthday, 'obj': contacts},
+        'delete-contact': {'name': delete_contact, 'obj': contacts},
         'delete-email': {'name': delete_email, 'obj': contacts},
-        'show': {'name': show, 'obj': contacts},
+        'show-address': {'name': show_address, 'obj': contacts},
+        'search-contact': {'name': search_contact, 'obj': contacts},
+        'show-birthday': {'name': show_birthday, 'obj': contacts},
+        'show-contact': {'name': show_contact, 'obj': contacts},
+        'show-email': {'name': show_email, 'obj': contacts},
+        'show-phone': {'name': show_phone, 'obj': contacts},
 
         'add-note': {'name': add_note, 'obj': notes},
-        'update-note': {'name': update_note, 'obj': notes},
-        'search-note': {'name': search_note, 'obj': notes},
-        'remove-note': {'name': remove_note, 'obj': notes},
-        'all-notes': {'name': all_notes, 'obj': notes},
         'add-tags': {'name': add_tags, 'obj': notes},
-        'remove-tag': {'name': remove_tag, 'obj': notes},
+        'all-notes': {'name': all_notes, 'obj': notes},
+        'delete-note': {'name': delete_note, 'obj': notes},
+        'delete-tag': {'name': delete_tag, 'obj': notes},
+        'search-note': {'name': search_note, 'obj': notes},
         'search-tags': {'name': search_tags, 'obj': notes},
+        'update-note': {'name': update_note, 'obj': notes},
     }
 
     while (True):

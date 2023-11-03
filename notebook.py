@@ -11,7 +11,7 @@ class Notebook(UserDict):
         self.filename = 'notes'
         if os.path.exists(self.filename):
             self.load_records()
-            self.__id = max([id for id in self])+1
+            self.__id = max([id for id in self])+1 if len(self) > 0 else 1
         else:
             self.data = {}
             self.__id = 1
@@ -88,12 +88,12 @@ class Notebook(UserDict):
             return 'Note not found.'
         
     def search_by_tags(self, tags):
-        result = ''
+        result = []
         for note in self.values():
             if any(tag in note["tags"] for tag in tags):
-                result += str(note) + '\n'
+                result.append(str(note))
         
-        return result if len(result) > 0 else 'No matches found'
+        return '\n'.join(result) if len(result) > 0 else 'No matches found'
 
     def __str__(self):
         return '\n'.join([f'{str(self[k])}' for k in self]) if len(self) > 0 else 'No notes were found.'
