@@ -20,6 +20,7 @@ The Contact Assistant is a versatile tool that allows you to manage contacts and
 - `all`: Show all contacts in the AddressBook.
 - `show`: Show all contact info in the AddressBook.
 - `search`: Search for a contact in the AddressBook by name or other criteria.
+- `delete`: Delete contact from the AddressBook.
 
 ## Notes Functions
 
@@ -28,6 +29,8 @@ The Contact Assistant is a versatile tool that allows you to manage contacts and
 - `search-note`: Search for a note in the Notebook by content or other criteria.
 - `remove-note`: Remove a note from the Notebook.
 - `all-notes`: Display all notes in the Notebook.
+- `add-tags`: Add note tag to the Notebook.
+- `remove-tag`: Remove note tag from the Notebook.
 
 ## Usage
 
@@ -69,6 +72,8 @@ Feel free to explore and utilize the various commands provided by the Contact As
   > show Anton
 - `search`:
   > search ant
+- `delete`:
+  > delete Anton
 - `add-note`:
   > add-note 02.11.2023 - training results: 15 km run
 - `update-note`:
@@ -79,3 +84,7 @@ Feel free to explore and utilize the various commands provided by the Contact As
   > remove-note 1
 - `all-notes`:
   > all-notes
+- `add-tags`:
+  > add-tags 1 training
+- `remove-tag`:
+  > remove-tag 1 training
