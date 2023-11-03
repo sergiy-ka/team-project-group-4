@@ -275,8 +275,11 @@ def add_tags(args, notes: Notebook):
     return notes.add_tags(id, tags)
     
 def delete_tag(args, notes: Notebook):
-    id, tag = args
-    return notes.remove_tag(id, tag)
+    try:
+        id, tag = args
+        return notes.remove_tag(id, tag)
+    except ValueError:
+        return 'Please enter tag'
 
 
 def search_tags(args, notes: Notebook):
