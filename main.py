@@ -245,7 +245,6 @@ def change_email(args, contacts: AddressBook):
     try:
         name, email = args
         contact = contacts.find(name)
-        current_email = contact.email.value
         contact.add_email(email)
         contacts.save_records()
         return 'Email changed'

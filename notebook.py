@@ -63,7 +63,11 @@ class Notebook(UserDict):
     def add_tags(self, id, tags):
         try:
             note = self[int(id)]
-            note['tags'] = tags
+            if len(note['tags']) == 0:  
+                note['tags'] = tags
+            else:
+                for tag in tags:
+                    note['tags'].append(tag)
             self.save_records()
             return f'Tags are added to note {id}.'
         except KeyError:
