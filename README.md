@@ -9,6 +9,7 @@ The Contact Assistant is a versatile tool that allows you to manage contacts and
 - `change`: Change the information of an existing phone number in the AddressBook.
 - `add-birthday`: Add a birthday for a contact in the AddressBook.
 - `show-birthday`: Show the birthday of a contact in the AddressBook.
+- `change-birthday`: Change the birthday of a contact from the AddressBook.
 - `birthdays`: Show the birthdays of all contacts in the AddressBook for the next N days.
 - `add-address`: Add an address for a contact in the AddressBook.
 - `show-address`: Show the address of a contact from the AddressBook.
@@ -17,7 +18,9 @@ The Contact Assistant is a versatile tool that allows you to manage contacts and
 - `show-email`: Show the email address of a contact from the AddressBook.
 - `change-email`: Change the email address of a contact from the AddressBook.
 - `all`: Show all contacts in the AddressBook.
+- `show`: Show all contact info in the AddressBook.
 - `search`: Search for a contact in the AddressBook by name or other criteria.
+- `delete`: Delete contact from the AddressBook.
 
 ## Notes Functions
 
@@ -26,6 +29,8 @@ The Contact Assistant is a versatile tool that allows you to manage contacts and
 - `search-note`: Search for a note in the Notebook by content or other criteria.
 - `remove-note`: Remove a note from the Notebook.
 - `all-notes`: Display all notes in the Notebook.
+- `add-tags`: Add note tag to the Notebook.
+- `remove-tag`: Remove note tag from the Notebook.
 
 ## Usage
 
@@ -45,6 +50,8 @@ Feel free to explore and utilize the various commands provided by the Contact As
   > add-birthday Anton 08.11.1981
 - `show-birthday`:
   > show-birthday Anton
+- `change-birthday`:
+  > change-birthday Anton 08.12.1981
 - `birthdays`:
   > birthdays 7
 - `add-address`:
@@ -61,8 +68,12 @@ Feel free to explore and utilize the various commands provided by the Contact As
   > change-email Anton anton.mail@yahoo.com
 - `all`:
   > all
+- `show`:
+  > show Anton
 - `search`:
   > search ant
+- `delete`:
+  > delete Anton
 - `add-note`:
   > add-note 02.11.2023 - training results: 15 km run
 - `update-note`:
@@ -73,3 +84,7 @@ Feel free to explore and utilize the various commands provided by the Contact As
   > remove-note 1
 - `all-notes`:
   > all-notes
+- `add-tags`:
+  > add-tags 1 training
+- `remove-tag`:
+  > remove-tag 1 training

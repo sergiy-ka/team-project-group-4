@@ -81,13 +81,27 @@ def show_all(contacts: AddressBook):
     return str(contacts)
 
 
+def show(args, contacts: AddressBook):
+    try:
+        name = args[0]
+        contact = contacts.find(name)
+        return str(contact)
+    except IndexError:
+        return 'You need to give name.'
+    except KeyError:
+        return 'Contact not found.'
+
+
 def add_birthday(args, contacts: AddressBook):
     try:
         name, birthday = args
         contact = contacts.find(name)
-        contact.add_birthday(birthday)
-        contacts.save_records()
-        return 'Birthday added.'
+        if hasattr(contact, 'birthday'):
+            return 'Contact already has birthday.'
+        else:
+            contact.add_birthday(birthday)
+            contacts.save_records()
+            return 'Birthday added.'
     except BirthdayFormatError as e:
         return e
     except BirthdayValueError as e:
@@ -107,6 +121,26 @@ def show_birthday(args, contacts: AddressBook):
         return 'You need to give name.'
     except KeyError:
         return 'Contact not found.'
+
+
+def change_birthday(args, contacts: AddressBook):
+    try:
+        name, birthday = args
+        contact = contacts.find(name)
+        current_birthday = contact.birthday.value
+        contact.add_birthday(birthday)
+        contacts.save_records()
+        return 'Birthday changed.'
+    except BirthdayFormatError as e:
+        return e
+    except BirthdayValueError as e:
+        return e
+    except ValueError:
+        return 'You need to give name and birthday.'
+    except KeyError:
+        return 'Contact not found.'
+    except AttributeError:
+        return 'Contact has no birthday to change.'
 
 
 def birthdays(args, contacts: AddressBook):
@@ -288,6 +322,7 @@ def main():
         'all': {'name': show_all, 'obj': contacts},
         'add-birthday': {'name': add_birthday, 'obj': contacts},
         'show-birthday': {'name': show_birthday, 'obj': contacts},
+        'change-birthday': {'name': change_birthday, 'obj': contacts},
         'birthdays': {'name': birthdays, 'obj': contacts},
         'add-address': {'name': add_address, 'obj': contacts},
         'show-address': {'name': show_address, 'obj': contacts},
@@ -296,6 +331,7 @@ def main():
         'add-email': {'name': add_email, 'obj': contacts},
         'show-email': {'name': show_email, 'obj': contacts},
         'change-email': {'name': change_email, 'obj': contacts},
+        'show': {'name': show, 'obj': contacts},
 
         'add-note': {'name': add_note, 'obj': notes},
         'update-note': {'name': update_note, 'obj': notes},
