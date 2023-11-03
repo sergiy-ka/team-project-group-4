@@ -12,6 +12,9 @@ class Record:
 
     def add_birthday(self, value):
         self.birthday = Birthday(value)
+        
+    def remove_birthday(self):
+            del self.birthday
 
     def show_birthday(self):
         if hasattr(self, 'birthday') and self.birthday is not None:
@@ -63,6 +66,13 @@ class Record:
             return self.address.value
         else:
             return 'Address info not found.'
+        
+    def delete_address(self):
+        if hasattr(self, 'address') and self.address is not None:
+            del self.address
+            return 'Address deleted.'
+        else:
+            return 'Address info not found.'
 
     def add_email(self, value):
         self.email = Email(value)
@@ -70,6 +80,13 @@ class Record:
     def show_email(self):
         if hasattr(self, 'email') and self.email is not None:
             return self.email.value
+        else:
+            return 'Email info not found.'
+
+    def delete_email(self):
+        if hasattr(self, 'email') and self.email is not None:
+            del self.email
+            return 'Email deleted.'
         else:
             return 'Email info not found.'
 
