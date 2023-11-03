@@ -64,6 +64,8 @@ class Notebook(UserDict):
             return f'Tags are added to note {id}.'
         except KeyError:
             return 'Note not found.'
+        except ValueError:
+            return 'Wrong id'
         
     def remove_tag(self, id, tag):
         try:
@@ -76,6 +78,14 @@ class Notebook(UserDict):
             return 'There is no such tag'
         except KeyError:
             return 'Note not found.'
+        
+    def search_by_tags(self, tags):
+        result = ''
+        for note in self.values():
+            if any(tag in note["tags"] for tag in tags):
+                result += str(note) + '\n'
+        
+        return result if len(result) > 0 else 'No matches found'
 
     def __str__(self):
         return '\n'.join([f'{str(self[k])}' for k in self]) if len(self) > 0 else 'No notes were found.'

@@ -181,6 +181,9 @@ def remove_tag(args, notes: Notebook):
     id, tag = args
     return notes.remove_tag(id, tag)
 
+def search_tags(args, notes: Notebook):
+    return notes.search_by_tags(args)
+
 def add_email(args, contacts: AddressBook):
     try:
         name, email = args
@@ -252,6 +255,7 @@ def main():
         'all-notes': {'name': all_notes, 'obj': notes},
         'add-tags': {'name': add_tags, 'obj': notes},
         'remove-tag': {'name': remove_tag, 'obj': notes},
+        'search-tags': {'name': search_tags, 'obj': notes},
     }
 
     while (True):
