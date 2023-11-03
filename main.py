@@ -127,10 +127,12 @@ def change_birthday(args, contacts: AddressBook):
     try:
         name, birthday = args
         contact = contacts.find(name)
-        current_birthday = contact.birthday.value
-        contact.add_birthday(birthday)
-        contacts.save_records()
-        return 'Birthday changed.'
+        if not hasattr(contact, 'birthday'):
+            return 'Contact has no birthday to change.'
+        else:
+            contact.add_birthday(birthday)
+            contacts.save_records()
+            return 'Birthday changed.'
     except BirthdayFormatError as e:
         return e
     except BirthdayValueError as e:
@@ -139,8 +141,6 @@ def change_birthday(args, contacts: AddressBook):
         return 'You need to give name and birthday.'
     except KeyError:
         return 'Contact not found.'
-    except AttributeError:
-        return 'Contact has no birthday to change.'
 
 
 def delete_birthday(args, contacts: AddressBook):
@@ -209,10 +209,12 @@ def change_address(args, contacts: AddressBook):
         name, *address = args
         address_str = (" ").join(address).title()
         contact = contacts.find(name)
-        current_address = contact.address.value
-        contact.add_address(address_str)
-        contacts.save_records()
-        return 'Address changed.'
+        if not hasattr(contact, 'address'):
+            return 'Contact has no address to change.'
+        else:
+            contact.add_address(address_str)
+            contacts.save_records()
+            return 'Address changed.'
     except AddressFormatError as e:
         return e
     except AddressEmptyError as e:
@@ -221,8 +223,6 @@ def change_address(args, contacts: AddressBook):
         return 'You need to give name and address.'
     except KeyError:
         return 'Contact not found.'
-    except AttributeError:
-        return 'Contact has no address to change.'
 
 
 def delete_address(args, contacts: AddressBook):
@@ -240,6 +240,7 @@ def delete_address(args, contacts: AddressBook):
         return 'You need to give the name of the contact.'
     except KeyError:
         return 'Contact not found.'
+
 
 def search(args, contacts: AddressBook):
     return contacts.search(args[0].strip())
@@ -278,8 +279,10 @@ def remove_tag(args, notes: Notebook):
     id, tag = args
     return notes.remove_tag(id, tag)
 
+
 def search_tags(args, notes: Notebook):
     return notes.search_by_tags(args)
+
 
 def add_email(args, contacts: AddressBook):
     try:
@@ -314,17 +317,18 @@ def change_email(args, contacts: AddressBook):
     try:
         name, email = args
         contact = contacts.find(name)
-        contact.add_email(email)
-        contacts.save_records()
-        return 'Email changed'
+        if not hasattr(contact, 'email'):
+            return 'Contact has no email to change.'
+        else:
+            contact.add_email(email)
+            contacts.save_records()
+            return 'Email changed'
     except EmailFormatError as e:
         return e
     except ValueError:
         return 'You need to give name and email.'
     except KeyError:
         return 'Contact not found.'
-    except AttributeError:
-        return 'Contact has no email to change.'
 
 
 def delete_email(args, contacts: AddressBook):
