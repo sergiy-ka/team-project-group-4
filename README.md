@@ -31,6 +31,7 @@ The Contact Assistant is a versatile tool that allows you to manage contacts and
 - `all-notes`: Display all notes in the Notebook.
 - `add-tags`: Add note tag to the Notebook.
 - `remove-tag`: Remove note tag from the Notebook.
+- `search-tags`: Search for notes by tags
 
 ## Usage
 
@@ -85,6 +86,8 @@ Feel free to explore and utilize the various commands provided by the Contact As
 - `all-notes`:
   > all-notes
 - `add-tags`:
-  > add-tags 1 training
+  > add-tags 2 tag1 tag2 tag3
 - `remove-tag`:
-  > remove-tag 1 training
+  > remove-tag 2 tag1
+- `search-tags`:
+  > search-tags tag2 tag4
