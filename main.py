@@ -143,6 +143,25 @@ def change_birthday(args, contacts: AddressBook):
         return 'Contact has no birthday to change.'
 
 
+def delete_birthday(args, contacts: AddressBook):
+    try:
+        name = args[0]
+        contact = contacts.find(name)
+
+        if hasattr(contact, 'birthday'):
+            contact.remove_birthday()
+            contacts.save_records()
+            return f'Birthday for {name} deleted.'
+        else:
+            return 'Contact has no birthday to delete.'
+    except IndexError:
+        return 'You need to give the name.'
+    except KeyError:
+        return 'Contact not found.'
+    except AttributeError:
+        return 'Contact has no birthday to delete.'
+
+
 def birthdays(args, contacts: AddressBook):
     try:
         count_days = int(args[0])
@@ -205,6 +224,22 @@ def change_address(args, contacts: AddressBook):
     except AttributeError:
         return 'Contact has no address to change.'
 
+
+def delete_address(args, contacts: AddressBook):
+    try:
+        name = args[0]
+        contact = contacts.find(name)
+
+        if hasattr(contact, 'address'):
+            contact.delete_address()
+            contacts.save_records()
+            return 'Address deleted.'
+        else:
+            return 'Contact has no address to delete.'
+    except IndexError:
+        return 'You need to give the name of the contact.'
+    except KeyError:
+        return 'Contact not found.'
 
 def search(args, contacts: AddressBook):
     return contacts.search(args[0].strip())
@@ -291,6 +326,23 @@ def change_email(args, contacts: AddressBook):
         return 'Contact has no email to change.'
 
 
+def delete_email(args, contacts: AddressBook):
+    try:
+        name = args[0]
+        contact = contacts.find(name)
+
+        if hasattr(contact, 'email'):
+            contact.delete_email()
+            contacts.save_records()
+            return 'Email deleted.'
+        else:
+            return 'Contact has no email to delete.'
+    except IndexError:
+        return 'You need to give the name of the contact.'
+    except KeyError:
+        return 'Contact not found.'
+
+
 def check_suggestion(keyword, items):
     matches = difflib.get_close_matches(keyword, items, n=3)
 
@@ -323,14 +375,17 @@ def main():
         'add-birthday': {'name': add_birthday, 'obj': contacts},
         'show-birthday': {'name': show_birthday, 'obj': contacts},
         'change-birthday': {'name': change_birthday, 'obj': contacts},
+        'delete-birthday': {'name': delete_birthday, 'obj': contacts},
         'birthdays': {'name': birthdays, 'obj': contacts},
         'add-address': {'name': add_address, 'obj': contacts},
         'show-address': {'name': show_address, 'obj': contacts},
         'change-address': {'name': change_address, 'obj': contacts},
+        'delete-address': {'name': delete_address, 'obj': contacts},
         'search': {'name': search, 'obj': contacts},
         'add-email': {'name': add_email, 'obj': contacts},
         'show-email': {'name': show_email, 'obj': contacts},
         'change-email': {'name': change_email, 'obj': contacts},
+        'delete-email': {'name': delete_email, 'obj': contacts},
         'show': {'name': show, 'obj': contacts},
 
         'add-note': {'name': add_note, 'obj': notes},
