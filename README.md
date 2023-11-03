@@ -1,6 +1,6 @@
 # Contact Assistant README
 
-The Contact Assistant is a versatile tool that allows you to manage contacts and notes effectively. Below is a list of available commands and their descriptions for both the AddressBook and Notes functionality.
+The Contact Assistant is a versatile tool that allows you to manage contacts and notes effectively. Below is a list of available commands and their descriptions for both the AddressBook and Notes functionality
 
 ## AddressBook Functions
 
