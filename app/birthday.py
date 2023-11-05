@@ -1,4 +1,4 @@
-from field import Field
+from app.field import Field
 from datetime import datetime
 import re
 

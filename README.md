@@ -4,6 +4,7 @@ The Contact Assistant is a versatile tool that allows you to manage contacts and
 
 ## AddressBook Functions
 
+- `all`: List of all commands
 - `add-address`: Add an address for a contact in the AddressBook.
 - `add-birthday`: Add a birthday for a contact in the AddressBook.
 - `add-contact`: Add a new contact to the AddressBook.
@@ -44,6 +45,8 @@ Feel free to explore and utilize the various commands provided by the Contact As
 
 ### Examples of use by command:
 
+- `all`:
+  > all
 - `add-address`:
   > add-address Anton Kyivska St.1, Apt.1, Kyiv, Ukraine, 01001
 - `add-birthday`:

@@ -1,4 +1,4 @@
-from field import Field
+from app.field import Field
 
 class Name(Field):
     def __init__(self, value):

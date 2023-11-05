@@ -1,7 +1,7 @@
 from collections import UserDict
 from datetime import datetime, timedelta
-from name import Name
-from record import Record
+from app.name import Name
+from app.record import Record
 from collections import defaultdict, UserDict, OrderedDict
 import os
 import pickle
@@ -92,19 +92,16 @@ class AddressBook(UserDict):
         if len(query) < 2:
             return 'Please enter 2 or more characters'
 
-        result = ''
+        result = []
         for name, info in self.data.items():
             address = info.address.value.lower() if hasattr(info, 'address') else None
             phones = ' '.join([p.value for p in info.phones])
             birthday = info.birthday.value.strftime("%d.%m.%Y") if hasattr(info,"birthday") else None
-            all = f"{name} {address if address else ''} {phones} {birthday if birthday else ''}"
-            if query.lower() in all:
-                result += str(info)
-
-        if len(result) == 0:
-            return 'No results'
+            all = f"{name.lower()} {address if address else ''} {phones} {birthday if birthday else ''}"
+            if query in all:
+                result.append(str(info))
         
-        return result
+        return '\n'.join(result) if len(result) > 0 else 'No results'
     
     def __str__(self):
         return '\n'.join([str(record) for record in self.data.values()]) if len(self.data) > 0 else 'Address book is empty'
