@@ -1,5 +1,5 @@
 from collections import UserDict
-from note import Note
+from app.note import Note
 from datetime import datetime
 import os
 import pickle

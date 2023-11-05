@@ -1,8 +1,8 @@
-from birthday import Birthday
-from name import Name
-from phone import Phone, PhoneFormatError
-from address import Address
-from ct_email import Email
+from app.birthday import Birthday
+from app.name import Name
+from app.phone import Phone, PhoneFormatError
+from app.address import Address
+from app.ct_email import Email
 
 
 class Record:

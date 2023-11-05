@@ -1,6 +1,8 @@
-from address_book import AddressBook
-from notebook import Notebook
-from methods import *
+import sys
+sys.path.append('app')
+from app.address_book import AddressBook
+from app.notebook import Notebook
+from app.methods import *
 
 def main():
     print('Welcome to the Contact Assistant!')
@@ -42,12 +44,14 @@ def main():
 
     while (True):
         cmd, args = parseCommands(input('> '))
-        # clear_console()
         if cmd == 'hello':
             print('How can I help you?')
         elif (cmd == 'close' or cmd == 'exit'):
             print('Good bye!')
             break
+        elif (cmd == 'all'):
+            print('\n'.join(methods.keys()))
+            continue
         else:
             if cmd in methods:
                 if len(args) > 0:

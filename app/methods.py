@@ -1,22 +1,11 @@
-from address_book import AddressBook
-from notebook import Notebook
-from birthday import BirthdayFormatError, BirthdayValueError
-from phone import PhoneFormatError
-from record import Record
-from address import AddressFormatError, AddressEmptyError
-from ct_email import EmailFormatError
-import os
-import platform
+from app.address_book import AddressBook
+from app.notebook import Notebook
+from app.birthday import BirthdayFormatError, BirthdayValueError
+from app.phone import PhoneFormatError
+from app.record import Record
+from app.address import AddressFormatError, AddressEmptyError
+from app.ct_email import EmailFormatError
 import difflib
-
-def clear_console():
-
-    system = platform.system()
-
-    if system == "Windows":
-        os.system('cls')
-    else:
-        os.system('clear')
 
 def input_error(func):
     def inner(*args, **kwargs):
@@ -363,5 +352,5 @@ def parseCommands(input):
     if input == '':
         return '', []
 
-    cmd, *args = input.strip().lower().split()
+    cmd, *args = input.strip().split()
     return cmd, args
