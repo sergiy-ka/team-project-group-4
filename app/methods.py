@@ -7,6 +7,7 @@ from app.address import AddressFormatError, AddressEmptyError
 from app.ct_email import EmailFormatError
 import difflib
 
+
 def input_error(func):
     def inner(*args, **kwargs):
         try:
@@ -162,7 +163,7 @@ def birthdays(args, contacts: AddressBook):
 def add_address(args, contacts: AddressBook):
     try:
         name, *address = args
-        address_str = (" ").join(address).title()
+        address_str = (" ").join(address)
         contact = contacts.find(name)
         if hasattr(contact, 'address'):
             return 'Contact already has address.'
@@ -194,7 +195,7 @@ def show_address(args, contacts: AddressBook):
 def change_address(args, contacts: AddressBook):
     try:
         name, *address = args
-        address_str = (" ").join(address).title()
+        address_str = (" ").join(address)
         contact = contacts.find(name)
         if not hasattr(contact, 'address'):
             return 'Contact has no address to change.'
@@ -262,7 +263,8 @@ def add_tags(args, notes: Notebook):
     if len(tags) == 0:
         return 'Please enter tags'
     return notes.add_tags(id, tags)
-    
+
+
 def delete_tag(args, notes: Notebook):
     try:
         id, tag = args
@@ -349,7 +351,7 @@ def check_suggestion(keyword, items):
 
 
 def parseCommands(input):
-    if input == '':
+    if input.strip() == '':
         return '', []
 
     cmd, *args = input.strip().split()
